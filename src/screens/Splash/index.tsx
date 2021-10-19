@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { getSplashToken } from '../Login/redux/actionCreators';
+import { getSplashToken } from '@screens/Login/redux/actionCreators';
 
 export const Splash: FC = () => {
   const dispatch = useDispatch();

@@ -1,10 +1,10 @@
 import { SagaIterator } from '@redux-saga/core';
-import { tokenSelector } from '../../../../src/redux/selectors';
+import { tokenSelector } from '@redux/selectors';
 import { takeLatest, put, delay, select, call } from 'redux-saga/effects';
 import { setLoginIsLoading, setLoginData } from './actionCreators';
 import { TYPES } from './actionTypes';
-import * as RootNavigation from '../../../../src/navigation/helpers';
-import { ROUTES } from '../../../navigation/routes';
+import * as RootNavigation from '@navigation/helpers';
+import { ROUTES } from '@navigation/routes';
 
 /**
  * Login saga

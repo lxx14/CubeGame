@@ -1,4 +1,4 @@
-import { loginIsLoadingSelector } from '../../../src/redux/selectors';
+import { loginIsLoadingSelector } from '@redux/selectors';
 import React, { FC } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';

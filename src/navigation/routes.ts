@@ -3,7 +3,7 @@ export enum ROUTES {
   LOGIN = 'Login',
   GAME_DASHBOARD = 'GameDashboard',
   SETTINGS = 'Settings',
-  MAIN = 'Main',
+  MAIN = 'Main', // tab navigator
   STATISTIC = 'Statistic',
   CHAT = 'Chat',
 }

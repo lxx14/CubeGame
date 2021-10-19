@@ -9,7 +9,7 @@ export const initState: ILoginState = {
 
 export default (state: ILoginState = initState, { type, payload }: IAction<TYPES>): ILoginState => {
   switch (type) {
-    case TYPES.SET_TOKEN:
+    case TYPES.SET_LOGIN_DATA:
       return {
         ...state,
         token: payload.token,

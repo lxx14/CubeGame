@@ -1,10 +1,10 @@
 import React from 'react';
-import { ROUTES } from '../../routes';
+import { ROUTES } from '@navigation/routes';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { GameDashboard } from '../../../../src/screens/TabScreens/GameDashboard';
-import { Settings } from '../../../../src/screens/TabScreens/Settings';
-import { Statistic } from '../../../../src/screens/TabScreens/Statistic';
-import { Chat } from '../../../../src/screens/TabScreens/Chat';
+import { GameDashboard } from '@screens/TabScreens/GameDashboard';
+import { Settings } from '@screens/TabScreens/Settings';
+import { Statistic } from '@screens/TabScreens/Statistic';
+import { Chat } from '@screens/TabScreens/Chat';
 
 const Tab = createBottomTabNavigator();
 

@@ -62,21 +62,12 @@
     ],
     "paths": {
       "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/common/components/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@context/*": ["./src/common/context/*"],
-      "@helpers/*": ["./src/helpers/*"],
-      "@modals/*": ["./src/common/modals/*"],
-      "@interfaces/*": ["./src/interfaces/*"],
-      "@navigation/*": ["./src/navigation/*"],
       "@screens/*": ["./src/screens/*"],
       "@redux/*": ["./src/redux/*"],
-      "@services/*": ["./src/services/*"],
-      "@test-mocks/*": ["./__mocks__/*"],
-      "@test-helpers/*": ["./__helpers__/*"],
+      "@navigation/*": ["./src/navigation/*"],
     }
   },
-  "include": ["src", "src/App.tsx"],
+  "include": ["src"],
   "exclude": [
     "node_modules", "babel.config.js", "metro.config.js", "jest.config.js"
   ]

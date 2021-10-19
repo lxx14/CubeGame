@@ -1,4 +1,4 @@
-import { setLogout } from '../../Login/redux/actionCreators';
+import { setLogout } from '@screens/Login/redux/actionCreators';
 import React, { FC } from 'react';
 import { SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
