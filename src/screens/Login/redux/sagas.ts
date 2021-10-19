@@ -41,7 +41,7 @@ export function* splashScreenSaga(): SagaIterator {
     const token = yield select(tokenSelector);
     yield delay(2000);
     if (token) {
-      yield call(RootNavigation.navigate, ROUTES.GAME_DASHBOARD);
+      yield call(RootNavigation.navigate, ROUTES.MAIN);
     } else {
       yield call(RootNavigation.navigate, ROUTES.LOGIN);
     }

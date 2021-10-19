@@ -15,7 +15,7 @@ export const Login: FC = () => {
     <ActivityIndicator color={'blue'} />
   ) : (
     <SafeAreaView>
-      <Text>Main Page</Text>
+      <Text>Tap Login under</Text>
       <TouchableOpacity onPress={onLogin}>
         <Text>Login</Text>
       </TouchableOpacity>
