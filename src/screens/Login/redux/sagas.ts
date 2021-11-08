@@ -5,19 +5,29 @@ import { setLoginIsLoading, setLoginData } from './actionCreators';
 import { TYPES } from './actionTypes';
 import * as RootNavigation from '@navigation/helpers';
 import { ROUTES } from '@navigation/routes';
+import { loginApi } from '../../../../src/api/login';
+import { Alert } from 'react-native';
 
 /**
  * Login saga
  */
-export function* loginSaga(): SagaIterator {
+export function* loginSaga(action): SagaIterator {
   try {
+    const { email, password } = action.payload;
+
     yield put(setLoginIsLoading(true));
-    yield put(setLoginData('test_token'));
-    yield delay(1500);
-    yield put(setLoginIsLoading(false));
-    yield call(RootNavigation.navigate, ROUTES.MAIN);
+    const result = yield call(loginApi, email, password);
+
+    if (result?.status === 200) {
+      yield put(setLoginData(result?.data?.idToken));
+      yield delay(1500);
+      yield put(setLoginIsLoading(false));
+      yield call(RootNavigation.navigate, ROUTES.MAIN);
+    }
   } catch (e) {
     console.log(`loginSaga error: ${e.message as string}`, e);
+    yield put(setLoginIsLoading(false));
+    yield call(Alert.alert, 'wrong email or password');
   }
 }
 

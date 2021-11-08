@@ -10,20 +10,20 @@ import {
   View,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLoginData } from './redux/actionCreators';
+import { signUpAction } from './redux/actionCreators';
 
-export const Login: FC<any> = ({ navigation }) => {
+export const SignUp: FC<any> = ({ navigation }) => {
   const isLoading = useSelector(loginIsLoadingSelector);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
-  const onLogin = () => {
-    dispatch(getLoginData(email, password));
+  const onSignUp = () => {
+    dispatch(signUpAction(email, password));
   };
 
-  const goToSignUp = () => {
-    navigation.navigate(ROUTES.SIGN_UP);
+  const goToLogin = () => {
+    navigation.navigate(ROUTES.LOGIN);
   };
 
   return (
@@ -32,7 +32,7 @@ export const Login: FC<any> = ({ navigation }) => {
         <ActivityIndicator color={'blue'} style={{ paddingBottom: 30 }} />
       ) : (
         <View>
-          <Text>Tap Login under</Text>
+          <Text>Tap SignUp under</Text>
           <TextInput
             style={{
               height: 40,
@@ -55,11 +55,11 @@ export const Login: FC<any> = ({ navigation }) => {
             onChangeText={setPassword}
             placeholder={'password'}
           />
-          <TouchableOpacity onPress={onLogin}>
-            <Text>Login</Text>
+          <TouchableOpacity onPress={onSignUp}>
+            <Text>SignUp</Text>
           </TouchableOpacity>
           <Text style={{ marginTop: 30 }}>
-            Have not Account?<Text onPress={goToSignUp}> Sign Up</Text>
+            Already have Account?<Text onPress={goToLogin}> Login</Text>
           </Text>
         </View>
       )}

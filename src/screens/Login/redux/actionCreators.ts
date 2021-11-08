@@ -4,9 +4,9 @@ import { TYPES } from './actionTypes';
 /**
  * Get token and login
  */
-export const getLoginData = (): IAction<TYPES> => ({
+export const getLoginData = (email: string, password: string): IAction<TYPES> => ({
   type: TYPES.GET_LOGIN_DATA,
-  payload: {},
+  payload: { email, password },
 });
 
 /**

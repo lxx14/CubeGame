@@ -3,8 +3,14 @@ import { persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginReducer from '@screens/Login/redux/reducer';
 
+const identityConfig = {
+  key: 'identity',
+  storage: AsyncStorage,
+  blacklist: ['isLoading'],
+};
+
 const allReducers = combineReducers({
-  login: persistReducer({ key: 'identity', storage: AsyncStorage }, LoginReducer),
+  login: persistReducer(identityConfig, LoginReducer),
 });
 
 const rootReducer: Reducer = (state, action) => {
