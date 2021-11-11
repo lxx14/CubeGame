@@ -1,4 +1,5 @@
 export enum ROUTES {
+  AUTH = 'Auth',
   SPLASH = 'Splash',
   LOGIN = 'Login',
   SIGN_UP = 'SignUp',

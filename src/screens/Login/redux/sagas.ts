@@ -38,7 +38,6 @@ export function* loginSaga({ payload }: IAction<TYPES>): SagaIterator {
 export function* logoutSaga(): SagaIterator {
   try {
     yield put(setLoginData(''));
-    yield call(RootNavigation.navigate, ROUTES.LOGIN);
   } catch (e) {
     console.log(`logoutSaga error: ${e.message as string}`, e);
   }
@@ -54,7 +53,7 @@ export function* splashScreenSaga(): SagaIterator {
     if (token) {
       yield call(RootNavigation.navigate, ROUTES.MAIN);
     } else {
-      yield call(RootNavigation.navigate, ROUTES.LOGIN);
+      yield call(RootNavigation.navigate, ROUTES.AUTH);
     }
   } catch (e) {
     console.log(`logoutSaga error: ${e.message as string}`, e);
