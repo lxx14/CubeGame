@@ -1,66 +1,47 @@
-import { ROUTES } from '@navigation/routes';
+import { useTheme } from '@react-navigation/native';
 import { loginIsLoadingSelector } from '@redux/selectors';
 import React, { FC, useState } from 'react';
-import {
-  ActivityIndicator,
-  SafeAreaView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ActivityIndicator, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { CommonInput } from '../../components/CommonInput';
+import { HaveAccount } from '../../components/HaveAccount';
 import { signUpAction } from './redux/actionCreators';
+import { styles } from './styles';
 
 export const SignUp: FC<any> = ({ navigation }) => {
   const isLoading = useSelector(loginIsLoadingSelector);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const { colors } = useTheme();
 
   const onSignUp = () => {
     dispatch(signUpAction(email, password));
   };
 
-  const goToLogin = () => {
-    navigation.navigate(ROUTES.LOGIN);
-  };
-
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ ...styles.container, backgroundColor: colors.background }}>
       {isLoading ? (
-        <ActivityIndicator color={'blue'} style={{ paddingBottom: 30 }} />
+        <ActivityIndicator color={colors.primary} />
       ) : (
-        <View>
-          <Text>Tap SignUp under</Text>
-          <TextInput
-            style={{
-              height: 40,
-              margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
+        <View style={styles.contentWrapper}>
+          <Text style={{ ...styles.loginTitle, color: colors.text }}>Sign Up</Text>
+          <CommonInput
             value={email}
-            onChangeText={setEmail}
+            onChangeValue={setEmail}
             placeholder={'email'}
+            type={'email-address'}
           />
-          <TextInput
-            style={{
-              height: 40,
-              margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
+          <CommonInput
             value={password}
-            onChangeText={setPassword}
+            onChangeValue={setPassword}
             placeholder={'password'}
+            secured={true}
           />
           <TouchableOpacity onPress={onSignUp}>
-            <Text>SignUp</Text>
+            <Text style={{ ...styles.button, color: colors.primary }}>Sign Up</Text>
           </TouchableOpacity>
-          <Text style={{ marginTop: 30 }}>
-            Already have Account?<Text onPress={goToLogin}> Login</Text>
-          </Text>
+          <HaveAccount screen={'Sign Up'} navigation={navigation} />
         </View>
       )}
     </SafeAreaView>

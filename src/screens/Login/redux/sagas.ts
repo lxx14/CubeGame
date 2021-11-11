@@ -7,13 +7,14 @@ import * as RootNavigation from '@navigation/helpers';
 import { ROUTES } from '@navigation/routes';
 import { loginApi } from '../../../../src/api/login';
 import { Alert } from 'react-native';
+import IAction from '@redux/interfaces/IAction';
 
 /**
  * Login saga
  */
-export function* loginSaga(action): SagaIterator {
+export function* loginSaga({ payload }: IAction<TYPES>): SagaIterator {
   try {
-    const { email, password } = action.payload;
+    const { email, password } = payload;
 
     yield put(setLoginIsLoading(true));
     const result = yield call(loginApi, email, password);

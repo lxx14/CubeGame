@@ -20,6 +20,7 @@ module.exports = {
           '@navigation': './src/navigation',
           '@screens': './src/screens',
           '@redux': './src/redux',
+          '@components': ['./src/components/*'],
         },
       },
     ],

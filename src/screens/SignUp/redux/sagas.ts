@@ -6,13 +6,14 @@ import * as RootNavigation from '@navigation/helpers';
 import { ROUTES } from '@navigation/routes';
 import { signUpApi } from '../../../../src/api/signUp';
 import { Alert } from 'react-native';
+import IAction from '@redux/interfaces/IAction';
 
 /**
  * SignUp saga
  */
-export function* signUpSaga(action): SagaIterator {
+export function* signUpSaga({ payload }: IAction<TYPES>): SagaIterator {
   try {
-    const { email, password } = action.payload;
+    const { email, password } = payload;
     const result = yield call(signUpApi, email, password);
 
     if (result?.status === 200) {
