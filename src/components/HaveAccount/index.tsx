@@ -20,7 +20,7 @@ export const HaveAccount: FC<IProps> = ({ navigation, screen }) => {
     <Text style={{ ...styles.text, color: colors.text }}>
       Have not Account?{' '}
       <Text onPress={goToScreen} style={{ color: colors.primary }}>
-        {screen}
+        {screen === 'Login' ? 'Sign Up' : 'Login'}
       </Text>
     </Text>
   );
