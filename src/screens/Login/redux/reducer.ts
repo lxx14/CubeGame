@@ -1,6 +1,5 @@
 import IAction from '@redux/interfaces/IAction';
 import { TYPES } from './actionTypes';
-import { TYPES as SignUpTypes } from '../../SignUp/redux/actionTypes';
 import { ILoginState } from './interfaces';
 
 export const initState: ILoginState = {
