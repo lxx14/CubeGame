@@ -1,6 +1,7 @@
 import { useTheme } from '@react-navigation/native';
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import { KeyboardTypeOptions, TextInput } from 'react-native';
+import { Theme } from '../../types/theme';
 import { styles } from './styles';
 
 interface IProps {
@@ -12,7 +13,7 @@ interface IProps {
 }
 
 export const CommonInput: FC<IProps> = ({ value, onChangeValue, placeholder, type, secured }) => {
-  const { colors } = useTheme();
+  const { colors } = useTheme() as Theme;
 
   return (
     <TextInput
