@@ -3,8 +3,8 @@ import { loginIsLoadingSelector } from '@redux/selectors';
 import React, { FC, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { HaveAccount } from '../../components/HaveAccount';
-import { CommonInput } from '../../components/CommonInput';
+import { HaveAccount } from '@components/HaveAccount';
+import { CommonInput } from '@components/CommonInput';
 import { getLoginData } from './redux/actionCreators';
 import { styles } from './styles';
 
