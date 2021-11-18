@@ -2,6 +2,7 @@ import { useTheme } from '@react-navigation/native';
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Switch, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
+import { Theme } from '../../../../types/theme';
 import { styles } from './styles';
 
 interface IProps {
@@ -10,7 +11,7 @@ interface IProps {
 }
 
 export const UserShortInfo: FC<IProps> = ({ onChangeSwitch, isEnabled }) => {
-  const { colors } = useTheme();
+  const { colors } = useTheme() as Theme;
 
   const text = isEnabled ? 'Show User Bio' : 'Show Detail Statistic';
 
@@ -24,7 +25,15 @@ export const UserShortInfo: FC<IProps> = ({ onChangeSwitch, isEnabled }) => {
       />
       <View style={styles.sitchWrapper}>
         <Text style={{ ...styles.text, color: colors.text }}>{text}</Text>
-        <Switch onValueChange={onChangeSwitch} value={isEnabled} />
+        <Switch
+          onValueChange={onChangeSwitch}
+          value={isEnabled}
+          thumbColor={colors.text}
+          trackColor={{
+            false: colors.placeholder,
+            true: colors.primary,
+          }}
+        />
       </View>
     </View>
   );
