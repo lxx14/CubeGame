@@ -1,14 +1,17 @@
-import { useTheme } from '@react-navigation/native';
-import React, { FC } from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import React, { FC, useState } from 'react';
+import { SafeAreaView } from 'react-native';
 import { styles } from './styles';
+import { UserBio } from './UserBio';
+import { UserShortInfo } from './UserShortInfo';
+import { UserStatistics } from './UserStatistics';
 
 export const Statistic: FC = () => {
-  const { colors } = useTheme();
+  const [isShowStatistic, setIsShowStatistic] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{ color: colors.text }}>Statistic</Text>
+      <UserShortInfo onChangeSwitch={setIsShowStatistic} isEnabled={isShowStatistic} />
+      {isShowStatistic ? <UserStatistics /> : <UserBio />}
     </SafeAreaView>
   );
 };

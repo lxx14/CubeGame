@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+  title: {
+    textTransform: 'uppercase',
+    marginBottom: 20,
+  },
+  text: {
+    marginBottom: 5,
   },
 });
 
