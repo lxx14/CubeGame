@@ -1,7 +1,9 @@
 import { useTheme } from '@react-navigation/native';
+import { avatarSelector } from '@redux/selectors';
 import React, { Dispatch, FC, SetStateAction, useState } from 'react';
 import { Switch, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
+import { useSelector } from 'react-redux';
 import { Theme } from '../../../../types/theme';
 import { EditAvatarComponent } from './EditAvatarComponent';
 import { styles } from './styles';
@@ -15,6 +17,7 @@ export const UserShortInfo: FC<IProps> = ({ onChangeSwitch, isEnabled }) => {
   const { colors } = useTheme() as Theme;
   const [isVisibleAvatarEditing, setIsVisibleAvatarEditing] = useState(false);
   const text = isEnabled ? 'Show User Bio' : 'Show Detail Statistic';
+  const avatar = useSelector(avatarSelector);
 
   const onAvatarPress = () => {
     setIsVisibleAvatarEditing(true);
@@ -27,7 +30,7 @@ export const UserShortInfo: FC<IProps> = ({ onChangeSwitch, isEnabled }) => {
         rounded
         containerStyle={styles.avatar}
         size="large"
-        source={require('@assets/images/user-avata-default.png')}
+        source={avatar ? { uri: avatar } : require('@assets/images/user-avata-default.png')}
         onPress={onAvatarPress}
       />
       <View style={styles.sitchWrapper}>

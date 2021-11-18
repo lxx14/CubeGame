@@ -25,11 +25,4 @@ module.exports = {
       },
     ],
   ],
-  env:     {
-    production: {
-      plugins: [
-        ['react-remove-properties', { 'properties': ['testID'] }],
-      ],
-    },
-  },
 };

@@ -10,16 +10,12 @@ export const UserBio: FC = () => {
   const [email, setEmail] = useState('Bob@gmail.com');
   const [aboutMe, setAboutMe] = useState('Empty... Yet:)');
 
-  const handleBlur = (e) => {
-    const tap: string = e.target._internalFiberInstanceHandleDEV.type;
-
-    if (!tap.includes('Input')) {
-      Keyboard.dismiss();
-    }
+  const handleBlur = () => {
+    Keyboard.dismiss();
   };
 
   return (
-    <View onTouchEnd={handleBlur} style={{ ...styles.wrapper, backgroundColor: colors.background }}>
+    <View style={{ ...styles.wrapper, backgroundColor: colors.background }}>
       <Text style={{ ...styles.title, color: colors.text }}>Nick Name:</Text>
       <TextInput
         style={{ ...styles.textInput, color: colors.text, borderColor: colors.border }}
