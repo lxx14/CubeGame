@@ -3,7 +3,16 @@ import { TYPES } from './actionTypes';
 import { ILoginState } from './interfaces';
 
 export const initState: ILoginState = {
-  token: '',
+  loginData: {
+    kind: '',
+    localId: '',
+    email: '',
+    displayName: '',
+    idToken: '',
+    registered: false,
+    refreshToken: '',
+    expiresIn: '',
+  },
   isLoading: false,
 };
 
@@ -12,12 +21,17 @@ export default (state: ILoginState = initState, { type, payload }: IAction<TYPES
     case TYPES.SET_LOGIN_DATA:
       return {
         ...state,
-        token: payload.token,
+        loginData: payload.data,
       };
     case TYPES.SET_LOGIN_IS_LOADING:
       return {
         ...state,
         isLoading: payload.isLoading,
+      };
+    case TYPES.LOGOUT:
+      return {
+        ...state,
+        ...initState,
       };
     default:
       return { ...state };

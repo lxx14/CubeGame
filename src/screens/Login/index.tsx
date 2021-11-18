@@ -5,7 +5,7 @@ import { ActivityIndicator, SafeAreaView, Text, TouchableOpacity, View } from 'r
 import { useDispatch, useSelector } from 'react-redux';
 import { HaveAccount } from '../../components/HaveAccount';
 import { CommonInput } from '../../components/CommonInput';
-import { getLoginData } from './redux/actionCreators';
+import { login } from './redux/actionCreators';
 import { styles } from './styles';
 
 export const Login: FC<any> = ({ navigation }) => {
@@ -16,7 +16,7 @@ export const Login: FC<any> = ({ navigation }) => {
   const { colors } = useTheme();
 
   const onLogin = () => {
-    dispatch(getLoginData(email, password));
+    dispatch(login(email, password));
   };
 
   return (

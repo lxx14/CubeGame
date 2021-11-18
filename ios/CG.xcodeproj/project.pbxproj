@@ -145,7 +145,6 @@
 				41DCE19A2F2255D89354004C /* Pods-CG-CGTests.debug.xcconfig */,
 				276F01C0419066B78CE6BFEF /* Pods-CG-CGTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

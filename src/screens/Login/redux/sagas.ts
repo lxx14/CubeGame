@@ -1,6 +1,5 @@
 import { SagaIterator } from '@redux-saga/core';
-import { tokenSelector } from '@redux/selectors';
-import { takeLatest, put, delay, select, call } from 'redux-saga/effects';
+import { takeLatest, put, delay, call } from 'redux-saga/effects';
 import { setLoginIsLoading, setLoginData } from './actionCreators';
 import { TYPES } from './actionTypes';
 import * as RootNavigation from '@navigation/helpers';
@@ -20,7 +19,7 @@ export function* loginSaga({ payload }: IAction<TYPES>): SagaIterator {
     const result = yield call(loginApi, email, password);
 
     if (result?.status === 200) {
-      yield put(setLoginData(result?.data?.idToken));
+      yield put(setLoginData(result?.data));
       yield delay(1500);
       yield put(setLoginIsLoading(false));
       yield call(RootNavigation.navigate, ROUTES.MAIN);
@@ -32,36 +31,4 @@ export function* loginSaga({ payload }: IAction<TYPES>): SagaIterator {
   }
 }
 
-/**
- * Logout saga
- */
-export function* logoutSaga(): SagaIterator {
-  try {
-    yield put(setLoginData(''));
-  } catch (e) {
-    console.log(`logoutSaga error: ${e.message as string}`, e);
-  }
-}
-
-/**
- * Check token on Splash Screen and navigate to login or to main stack
- */
-export function* splashScreenSaga(): SagaIterator {
-  try {
-    const token = yield select(tokenSelector);
-    yield delay(2000);
-    if (token) {
-      yield call(RootNavigation.navigate, ROUTES.MAIN);
-    } else {
-      yield call(RootNavigation.navigate, ROUTES.AUTH);
-    }
-  } catch (e) {
-    console.log(`logoutSaga error: ${e.message as string}`, e);
-  }
-}
-
-export default [
-  takeLatest(TYPES.GET_LOGIN_DATA, loginSaga),
-  takeLatest(TYPES.LOGOUT, logoutSaga),
-  takeLatest(TYPES.GET_SPLASH_SCREEN_TOKEN, splashScreenSaga),
-];
+export default [takeLatest(TYPES.GET_LOGIN_DATA, loginSaga)];

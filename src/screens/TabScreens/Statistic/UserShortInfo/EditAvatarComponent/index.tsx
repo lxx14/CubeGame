@@ -50,7 +50,7 @@ export const EditAvatarComponent: FC<IProps> = ({ setIsVisible }) => {
   const openGallery = async () => {
     slideOut();
     const result = await ImagePicker.launchImageLibrary(options);
-    console.log('result-------->', result?.assets[0].uri);
+
     dispatch(setUserAvatar(result?.assets[0]?.uri));
   };
 
@@ -70,10 +70,10 @@ export const EditAvatarComponent: FC<IProps> = ({ setIsVisible }) => {
         shadowColor: colors.text,
       }}>
       <TouchableOpacity onPress={openGallery}>
-        <Text style={{ ...styles.text, color: colors.text }}>Select from gallery</Text>
+        <Text style={{ ...styles.text, color: colors.primary }}>Select from gallery</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={onCloseAvatarEditing}>
-        <Text style={{ ...styles.text, color: colors.text }}>Close</Text>
+        <Text style={{ ...styles.text, color: colors.primary }}>Close</Text>
       </TouchableOpacity>
     </Animated.View>
   );

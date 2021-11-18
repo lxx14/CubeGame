@@ -17,7 +17,7 @@ export function* signUpSaga({ payload }: IAction<TYPES>): SagaIterator {
     const result = yield call(signUpApi, email, password);
 
     if (result?.status === 200) {
-      yield put(setLoginData(result?.data?.idToken));
+      yield put(setLoginData(result?.data));
       yield call(RootNavigation.navigate, ROUTES.MAIN);
     }
   } catch (e) {

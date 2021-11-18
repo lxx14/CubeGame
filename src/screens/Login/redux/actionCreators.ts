@@ -1,10 +1,11 @@
 import IAction from '@redux/interfaces/IAction';
 import { TYPES } from './actionTypes';
+import { ILoginState } from './interfaces';
 
 /**
  * Get token and login
  */
-export const getLoginData = (email: string, password: string): IAction<TYPES> => ({
+export const login = (email: string, password: string): IAction<TYPES> => ({
   type: TYPES.GET_LOGIN_DATA,
   payload: { email, password },
 });
@@ -12,9 +13,9 @@ export const getLoginData = (email: string, password: string): IAction<TYPES> =>
 /**
  * Set token
  */
-export const setLoginData = (token: string): IAction<TYPES> => ({
+export const setLoginData = (data: ILoginState): IAction<TYPES> => ({
   type: TYPES.SET_LOGIN_DATA,
-  payload: { token },
+  payload: { data },
 });
 
 /**
@@ -26,17 +27,9 @@ export const setLoginIsLoading = (isLoading: boolean): IAction<TYPES> => ({
 });
 
 /**
- * Set loading for login
+ * logout
  */
 export const setLogout = (): IAction<TYPES> => ({
   type: TYPES.LOGOUT,
-  payload: {},
-});
-
-/**
- * get token on splash screen
- */
-export const getSplashToken = (): IAction<TYPES> => ({
-  type: TYPES.GET_SPLASH_SCREEN_TOKEN,
   payload: {},
 });

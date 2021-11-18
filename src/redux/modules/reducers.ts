@@ -10,9 +10,14 @@ const identityConfig = {
   blacklist: ['isLoading'],
 };
 
+const avatarConfig = {
+  key: 'avatar',
+  storage: AsyncStorage,
+};
+
 const allReducers = combineReducers({
   login: persistReducer(identityConfig, LoginReducer),
-  avatar: persistReducer(identityConfig, AvatarReducer),
+  avatar: persistReducer(avatarConfig, AvatarReducer),
 });
 
 const rootReducer: Reducer = (state, action) => {
