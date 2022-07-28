@@ -12,15 +12,15 @@ export const NavigatorHandler = (): JSX.Element => {
 
   return (
     <Stack.Navigator>
-      {token ? (
-        <Stack.Screen
-          name={ROUTES.MAIN}
-          component={TabNavigator}
-          options={{
-            headerShown: false,
-          }}
-        />
-      ) : (
+      {/* {token ? ( */}
+      <Stack.Screen
+        name={ROUTES.MAIN}
+        component={TabNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
+      {/* ) : (
         <Stack.Screen
           name={ROUTES.AUTH}
           component={AuthNavigator}
@@ -28,7 +28,7 @@ export const NavigatorHandler = (): JSX.Element => {
             headerShown: false,
           }}
         />
-      )}
+      )} */}
     </Stack.Navigator>
   );
 };
