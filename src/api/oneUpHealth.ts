@@ -63,7 +63,6 @@ export const getTokenApi = (
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    // OMG!!!!!!!!!!!!!!!!!!!!!!
     data: new URLSearchParams({
       client_id,
       client_secret,
