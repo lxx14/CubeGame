@@ -1,5 +1,4 @@
 import {
-  connectClinicTestDataSelector,
   getUserAuthCodeDataSelector,
   getUserClinicalsSelector,
   getUsersSelector,
@@ -56,15 +55,7 @@ export const GameDashboard: FC = () => {
   const authCode = useSelector(getUserAuthCodeDataSelector, shallowEqual);
   const tokenData = useSelector(getUserTokenDataSelector, shallowEqual);
   const clinicals = useSelector(getUserClinicalsSelector, shallowEqual);
-  const testClinicData = useSelector(connectClinicTestDataSelector);
   const patientData = useSelector(patientDataSelector, shallowEqual);
-
-  console.log('users--------->', users);
-  console.log('authCode--------->', authCode);
-  console.log('tokenData--------->', tokenData);
-  console.log('clinicals--------->', clinicals);
-  console.log('testClinicData--------->', testClinicData);
-  console.log('patientData--------->', patientData);
 
   const onCreateUser = useCallback(() => {
     dispatch(createUser(app_user_id, client_id, client_secret));

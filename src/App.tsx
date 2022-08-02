@@ -8,6 +8,7 @@ import { useColorScheme } from 'react-native';
 import { DarkTheme } from '@assets/theme/DarkTheme';
 import { LightTheme } from '@assets/theme/LightTheme';
 import { NavigatorHandler } from '@navigation/navigators';
+import { RecoilRoot } from 'recoil';
 
 export const { store, persistor } = initializeStore();
 
@@ -16,11 +17,15 @@ export const App: FC = () => {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer ref={navigationRef} theme={scheme === 'dark' ? DarkTheme : LightTheme}>
-          <NavigatorHandler />
-        </NavigationContainer>
-      </PersistGate>
+      <RecoilRoot>
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationContainer
+            ref={navigationRef}
+            theme={scheme === 'dark' ? DarkTheme : LightTheme}>
+            <NavigatorHandler />
+          </NavigationContainer>
+        </PersistGate>
+      </RecoilRoot>
     </Provider>
   );
 };

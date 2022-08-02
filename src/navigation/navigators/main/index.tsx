@@ -17,6 +17,7 @@ export const TabNavigator = (): JSX.Element => {
       initialRouteName={ROUTES.GAME_DASHBOARD}
       screenOptions={{
         tabBarStyle: { backgroundColor: colors.background },
+        unmountOnBlur: true,
       }}>
       <Tab.Screen
         name={ROUTES.GAME_DASHBOARD}
