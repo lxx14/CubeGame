@@ -1,13 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useTheme } from '@react-navigation/native';
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { getTestDataApi } from '../../../api/recoilTestApi';
+import { delay, getTestDataApi, useGetTestDataWithLoading } from '../../../api/recoilTestApi';
 import { testApiDataAtom, testApiDataonStartAtom, textAtom } from './recoil/atoms';
-import { testApiOnStartSelector, testApiSelector, textSelector } from './recoil/selectors';
+import { testApiSelector, textSelector } from './recoil/selectors';
 import { styles } from './styles';
+import _ from 'lodash';
 
-export const Chat: FC = () => {
+const Chat: FC = () => {
+  // swr custom hook api reqest with SWR
+  const { testDataSWR, isErrorSWR, isLoadingSWR } = useGetTestDataWithLoading(
+    'https://jsonplaceholder.typicode.com/todos',
+  );
+
+  console.log('testDataSWR---------->', testDataSWR);
+  console.log('isLoadingSWR---------->', isLoadingSWR);
+
   const { colors } = useTheme();
 
   const [, setText] = useRecoilState(textAtom);
@@ -15,15 +25,9 @@ export const Chat: FC = () => {
   const [, setTestApiOnStartData] = useRecoilState(testApiDataonStartAtom);
 
   const [loading, setLoading] = useState(false);
-  const [loadingInBegining, setLoadingInBegining] = useState(false);
 
   const textData = useRecoilValue(textSelector);
   const testApiData = useRecoilValue(testApiSelector);
-  const testApiDataOnStart = useRecoilValue(testApiOnStartSelector);
-
-  const delay = (ms: number) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
 
   const setNewText = useCallback(() => {
     setText('changed text');
@@ -39,7 +43,7 @@ export const Chat: FC = () => {
     try {
       setLoading(true);
 
-      const testData = await getTestDataApi();
+      const testData = await getTestDataApi('https://jsonplaceholder.typicode.com/todos');
       setTestApiData(testData.data);
 
       await delay(1000);
@@ -51,23 +55,19 @@ export const Chat: FC = () => {
     }
   }, [setTestApiData]);
 
-  useEffect(() => {
-    const asyncOnRenderFunc = async () => {
-      try {
-        setLoadingInBegining(true);
-        const result = await getTestDataApi();
-        setTestApiOnStartData(result?.data);
+  const dataSWR = useMemo(() => {
+    return testDataSWR?.map((item) => (
+      <View
+        key={item.id}
+        style={{ borderWidth: 1, borderColor: 'black', marginVertical: 10, padding: 5 }}>
+        <Text>id: {item.id}</Text>
+        <Text>title: {item.title}</Text>
+        <Text>complited: {item.completed ? 'true' : 'false'}</Text>
+      </View>
+    ));
+  }, [testDataSWR]);
 
-        await delay(1000);
-
-        setLoadingInBegining(false);
-      } catch (error) {
-        console.log('error-------------->', error);
-        setLoadingInBegining(false);
-      }
-    };
-    void asyncOnRenderFunc();
-  }, [setTestApiOnStartData]);
+  console.log('render------------>');
 
   return (
     <ScrollView style={styles.container}>
@@ -97,19 +97,9 @@ export const Chat: FC = () => {
         onPress={getTestApiData}>
         <Text>get test data from api</Text>
       </TouchableOpacity>
-      <Text style={{ color: 'blue' }}>async example while screen entering:</Text>
-      {testApiDataOnStart.length > 0 &&
-        !loadingInBegining &&
-        testApiDataOnStart.data.map((item) => (
-          <View
-            key={item.id}
-            style={{ borderWidth: 1, borderColor: 'black', marginVertical: 10, padding: 5 }}>
-            <Text>id: {item.id}</Text>
-            <Text>title: {item.title}</Text>
-            <Text>complited: {item.completed ? 'true' : 'false'}</Text>
-          </View>
-        ))}
-      {loadingInBegining && <ActivityIndicator color={'blue'} size={50} />}
+      <Text style={{ color: 'blue' }}>async example while screen entering with SWR:</Text>
+      {dataSWR}
+      {isLoadingSWR && <ActivityIndicator color={'blue'} size={50} />}
       <TouchableOpacity
         style={{ backgroundColor: 'yellow', marginVertical: 20 }}
         onPress={clearState}>
@@ -118,3 +108,5 @@ export const Chat: FC = () => {
     </ScrollView>
   );
 };
+
+export default memo(Chat, _.isEqual);

@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { GameDashboard } from '@screens/TabScreens/GameDashboard';
 import { Settings } from '@screens/TabScreens/Settings';
 import { Statistic } from '@screens/TabScreens/Statistic';
-import { Chat } from '@screens/TabScreens/Chat';
+import Chat from '@screens/TabScreens/Chat';
 import { useTheme } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
